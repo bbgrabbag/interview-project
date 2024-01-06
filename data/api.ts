@@ -13,9 +13,11 @@ export const fetchSpices = async (filterByIds?: number[]) => {
 }
 
 export const fetchSpice = async (name: string) => {
-  const prom = new Promise<Spice>((resolveOuter) => {
+  const prom = new Promise<Spice>((resolveOuter, reject) => {
     setTimeout(() => {
-      resolveOuter(spices.find((spice) => spice.name === name) as Spice)
+      const spice = spices.find((spice) => spice.name === name);
+      if (!spice) return reject(Error(`No spice found with name: '${name}'`))
+      resolveOuter(spice as Spice)
     }, 2000)
   });
 
@@ -33,8 +35,11 @@ export const fetchBlends = async (filterByIds?: number[]) => {
 }
 
 export const fetchBlend = async (name: string) => {
-  const prom = new Promise<Blend>((resolveOuter) => {
+  const prom = new Promise<Blend>((resolveOuter, reject) => {
     setTimeout(() => {
+      const blend = blends.find((blend) => blend.name === name);
+      if (!blend) return reject(Error(`No blend found with name: '${name}'`))
+
       resolveOuter(blends.find((blend) => blend.name === name) as Blend)
     }, 2000)
   });

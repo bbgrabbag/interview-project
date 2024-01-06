@@ -22,7 +22,6 @@ const Spices: React.FC<SpicesProps> = async ({ params }) => {
             {blends.length ? <ul className="list-disc">
                 {blends.map(blend => <li className="ml-8"><Link href={`/blend/${blend.name}`}>{blend.name}</Link></li>)}
             </ul> : 'N/A'}
-
         </div>
     )
 }
