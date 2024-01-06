@@ -1,15 +1,12 @@
-import { fetchBlends, fetchSpices } from "@/data/api"
+import { fetchBlends } from "@/data/api"
+import Link from "next/link"
 
 const Spices = async () => {
-  const spices = await fetchSpices()
-  const blends = await fetchBlends()
-  console.log("render")
+  const blends = await fetchBlends();
   return (
     <div className="p-24">
-      <div>Blend List</div>
-      {blends.map(blend => <div key={blend.name}>{blend.name}</div>)}
-      <div>Related Spices</div>
-      {spices.map(spice => <div key={spice.name}>{spice.name}</div>)}
+      <h1 className='text-xl'>Blend List</h1>
+      {blends.map(blend => <div key={blend.name}><Link href={`/blend/${blend.name}`}>{blend.name}</Link></div>)}
     </div>
   )
 }
