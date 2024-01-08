@@ -19,12 +19,12 @@ interface SpicesProps extends PageProps {
 const Spices: React.FC<SpicesProps> = async ({ params }) => {
   const spice = await fetchSpice(decodeURIComponent(params.name))
   return (
-    <div className="p-24">
+    <div className="p-24 w-fit">
       <h1 className='text-xl'>Spice Detail</h1>
       <div>Name: {spice.name}</div>
       <div>Price: {spice.price}</div>
       <div>Heat: {spice.heat}</div>
-      <div>Color: {spice.color}</div>
+      <div className="flex flex-row items-center">Color: <code className="ml-2 rounded-md border-[1px] border-black" style={{ backgroundColor: `#${spice.color}` }}> #{spice.color}</code></div>
     </div>
   )
 }

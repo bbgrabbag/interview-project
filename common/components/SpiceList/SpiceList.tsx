@@ -55,7 +55,14 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
                 onSortChange={setActiveSortOption}
             />
             <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-4">
-                {applySort(applyFilters(spices)).map(spice => <div key={spice.name}><Link href={`/spice/${spice.name}`}>{spice.name}</Link></div>)}
+                {applySort(applyFilters(spices)).map(spice => (
+                    <div
+                        key={spice.name}
+                        className="flex flex-row gap-1 items-center">
+                        <div className="h-[12px] w-[12px] rounded-full" style={{ backgroundColor: `#${(spice as Spice).color}` }} />
+                        <Link href={`/spice/${spice.name}`}>{spice.name}</Link>
+                    </div>)
+                )}
             </div>
         </div>
     )
