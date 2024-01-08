@@ -25,3 +25,6 @@ export type FilterConfig<K extends string> = {
         options?: Array<string>,
     }
 }
+export type SortOption<K extends string> = { label: string, value: K }
+export type SortKeys = 'a-z' | 'z-a';
+export type SortRuleMap<K extends string, T> = Record<K, (itemA: T, itemB: T) => number> 

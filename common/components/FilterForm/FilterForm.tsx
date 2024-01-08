@@ -1,5 +1,5 @@
 import { ActiveFilters, FilterConfig } from "@/common/types";
-import { HTMLInputTypeAttribute, useEffect, useState } from "react";
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction, useCallback, useEffect, useState } from "react";
 
 const TextInput = ({
     value,
@@ -48,55 +48,54 @@ const DropdownMenu = ({
             </label>
         </div>
     )
-
 }
 
 
 interface FilterFormProps<K extends string> {
-    filters: FilterConfig<K>;
-    defaultActiveFilters?: ActiveFilters<K>;
-    onFilterChange: (activeFilters: ActiveFilters<K>) => void,
+    config: FilterConfig<K>;
+    activeFilters: ActiveFilters<K>;
+    onClear: () => void;
+    setActiveFilters: Dispatch<SetStateAction<ActiveFilters<K>>>;
 }
 
-export const FilterForm = <K extends string,>({ filters, defaultActiveFilters, onFilterChange }: FilterFormProps<K>) => {
+export const FilterForm = <K extends string,>({ config, activeFilters, setActiveFilters, onClear }: FilterFormProps<K>) => {
 
-    const [activeFilters, setActiveFilters] = useState<ActiveFilters<K>>(defaultActiveFilters || {})
-
-    useEffect(() => {
-        onFilterChange(activeFilters);
-    }, [activeFilters]);
-
+    const renderFormControls = useCallback(() => {
+        return Object.keys(config).map(k => {
+            const filterKey = k as keyof typeof config;
+            const filterConfig = config[filterKey];
+            const activeFilter = activeFilters[filterKey];
+            switch (filterConfig?.type) {
+                case 'text':
+                    return (
+                        <TextInput
+                            label={filterConfig.label}
+                            key={filterKey}
+                            value={activeFilter as string}
+                            handleChange={({ value }) => setActiveFilters(prev => ({ ...prev, [filterKey]: value }))}
+                        />
+                    );
+                case 'dropdown':
+                    return (
+                        <DropdownMenu
+                            label={filterConfig.label}
+                            key={filterKey}
+                            value={activeFilter as string}
+                            options={filterConfig.options || []}
+                            handleChange={({ value }) => setActiveFilters(prev => ({ ...prev, [filterKey]: value }))}
+                        />
+                    )
+                default:
+                    return null;
+            }
+        })
+    }, [config, activeFilters])
     return (
-        <form className="flex flex-col">
-            {Object.keys(filters).map(k => {
-                const filterKey = k as keyof typeof filters;
-                const config = filters[filterKey];
-                const activeFilter = activeFilters[filterKey];
-                switch (config?.type) {
-                    case 'text':
-                        return (
-                            <TextInput
-                                label={config.label}
-                                key={filterKey}
-                                value={activeFilter as string}
-                                handleChange={({ value }) => setActiveFilters(prev => ({ ...prev, [filterKey]: value }))}
-                            />
-                        );
-                    case 'dropdown':
-                        return (
-                            <DropdownMenu
-                                label={config.label}
-                                key={filterKey}
-                                value={activeFilter as string}
-                                options={config.options || []}
-                                handleChange={({ value }) => setActiveFilters(prev => ({ ...prev, [filterKey]: value }))}
-                            />
-                        )
-                    default:
-                        return null;
-                }
-            })}
-            <button type='button' onClick={() => setActiveFilters(defaultActiveFilters || {})}>Clear Filters</button>
+        <form>
+            <div>
+                {renderFormControls()}
+            </div>
+            <button type='button' onClick={onClear}>Clear Filters</button>
         </form>
     )
 }

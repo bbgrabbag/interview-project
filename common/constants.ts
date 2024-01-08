@@ -1,6 +1,6 @@
-import { FilterConfig, SpiceFilterKeys } from "./types";
+import { FilterConfig, SortKeys, SortOption, SpiceFilterKeys } from "./types";
 
-export const SPICE_FILTERS: FilterConfig<SpiceFilterKeys> = {
+export const SPICE_FILTER_CONFIG: FilterConfig<SpiceFilterKeys> = {
     search: {
         label: 'Search by keyword',
         type: 'text',
@@ -20,3 +20,8 @@ export const SPICE_FILTERS: FilterConfig<SpiceFilterKeys> = {
         options: ['All', '0', '1', '2', '3', '4', '5']
     }
 }
+
+export const SPICE_SORT_OPTIONS: SortOption<SortKeys>[] = [
+    { label: 'Name A-Z', value: 'a-z' },
+    { label: 'Name Z-A', value: 'z-a' },
+]
