@@ -13,7 +13,7 @@ export const SortForm = <K extends string,>({
 }: SortFormProps<K>) => {
 
     return (
-        <form>
+        <form data-testid='sort-form'>
             <label>
                 Sort By
                 <select value={activeSortOption.value} onChange={e => onSortChange(options.find(opt => opt.value === e.target.value) as SortOption<K>)}>

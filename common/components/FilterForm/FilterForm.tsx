@@ -91,7 +91,7 @@ export const FilterForm = <K extends string,>({ config, activeFilters, setActive
         })
     }, [config, activeFilters])
     return (
-        <form>
+        <form data-testid='filter-form'>
             <div>
                 {renderFormControls()}
             </div>
