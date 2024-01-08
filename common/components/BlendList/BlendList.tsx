@@ -7,6 +7,7 @@ import { BLEND_FILTER_CONFIG, SORT_OPTIONS } from "@/common/constants";
 import { blendFilterRuleMap, sortMap } from "@/common/utils";
 import { useFilter, useSort } from "@/common/hooks";
 import { SortForm } from "../SortForm";
+import { Loading } from "../Loading";
 
 
 interface BlendListProps {
@@ -38,8 +39,8 @@ export const BlendList: React.FC<BlendListProps> = ({ blends }) => {
     );
 
     return (
-        <div className="p-24">
-            <h1 className="text-xl">Blend List</h1>
+        <div className="px-4 pt-4">
+            <h1 className="text-xl pb-4">Blend List</h1>
             <FilterForm<BlendFilterKeys>
                 activeFilters={activeFilters}
                 onClear={clearFilters}
@@ -51,7 +52,7 @@ export const BlendList: React.FC<BlendListProps> = ({ blends }) => {
                 activeSortOption={activeSortOption}
                 onSortChange={setActiveSortOption}
             />
-            <div>
+            <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-4">
                 {applySort(applyFilters(blends)).map(blend => <div key={blend.name}><Link href={`/blend/${blend.name}`}>{blend.name}</Link></div>)}
             </div>
         </div>

@@ -1,5 +1,8 @@
+
 export const Loading = () => {
     return (
-        <p>...Loading</p>
+        <div className="flex flex-row justify-center py-4">
+            <p>Loading...</p>
+        </div>
     )
 }

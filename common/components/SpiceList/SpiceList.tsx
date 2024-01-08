@@ -41,8 +41,8 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
     );
 
     return (
-        <div className="p-24">
-            <h1 className="text-xl">Spice List</h1>
+        <div className="px-4 pt-4">
+            <h1 className="text-xl pb-4">Spice List</h1>
             <FilterForm<SpiceFilterKeys>
                 activeFilters={activeFilters}
                 onClear={clearFilters}
@@ -54,7 +54,7 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
                 activeSortOption={activeSortOption}
                 onSortChange={setActiveSortOption}
             />
-            <div>
+            <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-4">
                 {applySort(applyFilters(spices)).map(spice => <div key={spice.name}><Link href={`/spice/${spice.name}`}>{spice.name}</Link></div>)}
             </div>
         </div>

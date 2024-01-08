@@ -1,5 +1,5 @@
 import { ActiveFilters, FilterConfig } from "@/common/types";
-import { Dispatch, HTMLInputTypeAttribute, SetStateAction, useCallback, useEffect, useState } from "react";
+import { Dispatch, HTMLInputTypeAttribute, SetStateAction, useCallback } from "react";
 
 const TextInput = ({
     value,
@@ -13,10 +13,10 @@ const TextInput = ({
     type?: HTMLInputTypeAttribute
 }) => {
     return (
-        <div>
+        <div className="pb-2 max-w-[250px]">
             <label>
                 {label}
-                <input type={type} value={value || ''} onChange={(e) => {
+                <input className='w-full'type={type} value={value || ''} onChange={(e) => {
                     handleChange({ value: e.target.value || null })
                 }} />
             </label>
@@ -39,10 +39,10 @@ const DropdownMenu = ({
 }) => {
 
     return (
-        <div>
-            <label>
+        <div className="pb-2">
+            <label className="w-full">
                 {label}
-                <select value={value || options[0]} onChange={e => handleChange({ value: e.target.value })}>
+                <select className='ml-2 bg-white'value={value || options[0]} onChange={e => handleChange({ value: e.target.value })}>
                     {options.map((opt, i) => <option key={i}>{opt}</option>)}
                 </select>
             </label>
@@ -91,11 +91,11 @@ export const FilterForm = <K extends string,>({ config, activeFilters, setActive
         })
     }, [config, activeFilters])
     return (
-        <form data-testid='filter-form'>
-            <div>
+        <form data-testid='filter-form' className="pb-4 w-full">
+            <div className="flex flex-col md:flex-row md:gap-2 md:items-end">
                 {renderFormControls()}
             </div>
-            <button type='button' onClick={onClear}>Clear Filters</button>
+            <button className='border border-white px-2'type='button' onClick={onClear}>Clear Filters</button>
         </form>
     )
 }
