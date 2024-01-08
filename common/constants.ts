@@ -1,4 +1,4 @@
-import { FilterConfig, SortKeys, SortOption, SpiceFilterKeys } from "./types";
+import { BlendFilterKeys, FilterConfig, SortKeys, SortOption, SpiceFilterKeys } from "./types";
 
 export const SPICE_FILTER_CONFIG: FilterConfig<SpiceFilterKeys> = {
     search: {
@@ -21,7 +21,14 @@ export const SPICE_FILTER_CONFIG: FilterConfig<SpiceFilterKeys> = {
     }
 }
 
-export const SPICE_SORT_OPTIONS: SortOption<SortKeys>[] = [
+export const BLEND_FILTER_CONFIG: FilterConfig<BlendFilterKeys> = {
+    search: {
+        label: 'Search by keyword',
+        type: 'text',
+    },
+};
+
+export const SORT_OPTIONS: SortOption<SortKeys>[] = [
     { label: 'Name A-Z', value: 'a-z' },
     { label: 'Name Z-A', value: 'z-a' },
-]
+];

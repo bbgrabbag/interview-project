@@ -1,19 +1,19 @@
 'use client'
 
-import { SortKeys, Spice, SpiceFilterKeys } from "@/common/types";
+import { Blend, BlendFilterKeys, SortKeys } from "@/common/types";
 import { FilterForm } from "../FilterForm";
 import Link from "next/link";
-import { SPICE_FILTER_CONFIG, SORT_OPTIONS } from "@/common/constants";
-import { spiceFilterRuleMap, sortMap } from "@/common/utils";
+import { BLEND_FILTER_CONFIG, SORT_OPTIONS } from "@/common/constants";
+import { blendFilterRuleMap, sortMap } from "@/common/utils";
 import { useFilter, useSort } from "@/common/hooks";
 import { SortForm } from "../SortForm";
 
 
-interface SpiceListProps {
-    spices: Spice[];
+interface BlendListProps {
+    blends: Blend[];
 }
 
-export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
+export const BlendList: React.FC<BlendListProps> = ({ blends }) => {
 
     const {
         activeFilters,
@@ -21,12 +21,9 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
         clearFilters,
         setActiveFilters,
     } = useFilter(
-        spiceFilterRuleMap,
+        blendFilterRuleMap,
         {
             search: null,
-            color: null,
-            price: 'All',
-            heat: 'All'
         }
     )
 
@@ -42,12 +39,12 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
 
     return (
         <div className="p-24">
-            <h1 className="text-xl">Spice List</h1>
-            <FilterForm<SpiceFilterKeys>
+            <h1 className="text-xl">Blend List</h1>
+            <FilterForm<BlendFilterKeys>
                 activeFilters={activeFilters}
                 onClear={clearFilters}
                 setActiveFilters={setActiveFilters}
-                config={SPICE_FILTER_CONFIG}
+                config={BLEND_FILTER_CONFIG}
             />
             <SortForm<SortKeys>
                 options={options}
@@ -55,7 +52,7 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
                 onSortChange={setActiveSortOption}
             />
             <div>
-                {applySort(applyFilters(spices)).map(spice => <div key={spice.name}><Link href={`/spice/${spice.name}`}>{spice.name}</Link></div>)}
+                {applySort(applyFilters(blends)).map(blend => <div key={blend.name}><Link href={`/blend/${blend.name}`}>{blend.name}</Link></div>)}
             </div>
         </div>
     )

@@ -39,7 +39,6 @@ export const fetchBlend = async (name: string) => {
     setTimeout(() => {
       const blend = blends.find((blend) => blend.name === name);
       if (!blend) return reject(Error(`No blend found with name: '${name}'`))
-
       resolveOuter(blends.find((blend) => blend.name === name) as Blend)
     }, 2000)
   });

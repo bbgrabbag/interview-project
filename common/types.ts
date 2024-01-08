@@ -15,6 +15,7 @@ export interface Blend {
 }
 
 export type SpiceFilterKeys = 'search' | 'price' | 'heat' | 'color';
+export type BlendFilterKeys = 'search';
 export type FilterValue = string | number | null;
 export type FilterRuleMap<K extends string, T> = Record<K, ((item: T, filter: FilterValue) => boolean)>
 export type ActiveFilters<K extends string> = Partial<Record<K, FilterValue>>;
