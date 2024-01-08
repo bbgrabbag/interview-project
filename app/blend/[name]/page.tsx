@@ -7,11 +7,11 @@ import Link from "next/link";
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
     const blend = await fetchBlend(decodeURIComponent(params.name))
     return {
-      title: blend.name,
-      description: blend.description,
-      keywords: [blend.name, 'spice blends']
+        title: blend.name,
+        description: blend.description,
+        keywords: [blend.name, 'spice blends']
     }
-  }
+}
 
 interface BlendProps extends PageProps {
     params: { name: string }
@@ -27,11 +27,11 @@ const Blend: React.FC<BlendProps> = async ({ params }) => {
             <div>Description: {blend.description}</div>
             <h3>Spices:</h3>
             <ul className="list-disc">
-                {spices.map(spice => <li className="ml-8"><Link href={`/spice/${spice.name}`}>{spice.name}</Link></li>)}
+                {spices.map(spice => <li className="ml-8" key={spice.id}><Link href={`/spice/${spice.name}`}>{spice.name}</Link></li>)}
             </ul>
             <h3>Blends:</h3>
             {blends.length ? <ul className="list-disc">
-                {blends.map(blend => <li className="ml-8"><Link href={`/blend/${blend.name}`}>{blend.name}</Link></li>)}
+                {blends.map(blend => <li className="ml-8" key={blend.id}><Link href={`/blend/${blend.name}`}>{blend.name}</Link></li>)}
             </ul> : 'N/A'}
         </div>
     )
