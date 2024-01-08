@@ -52,7 +52,7 @@ export const BlendList: React.FC<BlendListProps> = ({ blends }) => {
                 activeSortOption={activeSortOption}
                 onSortChange={setActiveSortOption}
             />
-            <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-4">
+            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
                 {applySort(applyFilters(blends)).map(blend => <div key={blend.name}><Link href={`/blend/${blend.name}`}>{blend.name}</Link></div>)}
             </div>
         </div>

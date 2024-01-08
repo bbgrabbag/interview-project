@@ -54,7 +54,7 @@ export const SpiceList: React.FC<SpiceListProps> = ({ spices }) => {
                 activeSortOption={activeSortOption}
                 onSortChange={setActiveSortOption}
             />
-            <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-4">
+            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3">
                 {applySort(applyFilters(spices)).map(spice => (
                     <div
                         key={spice.name}
