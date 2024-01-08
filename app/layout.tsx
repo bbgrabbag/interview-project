@@ -6,8 +6,20 @@ import Link from 'next/link';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Interview Spice',
+  title: 'Interview Spice - Home',
   description: 'All the greatest spices',
+  keywords: ['baking', 'cooking', 'spices'],
+  icons: '/spice-icon.png',
+  metadataBase: new URL('https://production-site.com'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Interview Spice - Home',
+    description: 'All the greatest spices',
+    siteName: 'TOMO interview',
+    images: '/spice-icon.png'
+  }
 }
 
 export default function RootLayout({

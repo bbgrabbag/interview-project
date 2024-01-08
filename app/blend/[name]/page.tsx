@@ -1,12 +1,23 @@
 import { PageProps } from "@/.next/types/app/page"
 import { fetchBlend, fetchBlends, fetchSpices } from "@/data/api"
+import { Metadata } from "next";
 import Link from "next/link";
 
-interface SpicesProps extends PageProps {
+
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+    const blend = await fetchBlend(decodeURIComponent(params.name))
+    return {
+      title: blend.name,
+      description: blend.description,
+      keywords: [blend.name, 'spice blends']
+    }
+  }
+
+interface BlendProps extends PageProps {
     params: { name: string }
 }
 
-const Spices: React.FC<SpicesProps> = async ({ params }) => {
+const Blend: React.FC<BlendProps> = async ({ params }) => {
     const blend = await fetchBlend(decodeURIComponent(params.name));
     const [spices, blends] = await Promise.all([fetchSpices(blend.spices), fetchBlends(blend.blends)]);
     return (
@@ -26,4 +37,4 @@ const Spices: React.FC<SpicesProps> = async ({ params }) => {
     )
 }
 
-export default Spices
+export default Blend

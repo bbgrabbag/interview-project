@@ -1,5 +1,16 @@
 import { PageProps } from "@/.next/types/app/page"
 import { fetchSpice } from "@/data/api"
+import { Metadata } from "next"
+
+
+export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
+  const spice = await fetchSpice(decodeURIComponent(params.name))
+  return {
+    title: spice.name,
+    description: 'spice information details for ' + spice.name,
+    keywords: [spice.name, 'spice']
+  }
+}
 
 interface SpicesProps extends PageProps {
   params: { name: string }
